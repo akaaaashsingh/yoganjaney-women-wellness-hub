@@ -35,37 +35,43 @@ const ContactSection = () => (
   <section id="contact" className="section-padding bg-background">
     <div className="container-narrow">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-14"
+        transition={{ duration: 0.8 }}
+        className="text-center mb-20"
       >
-        <p className="font-body text-xs font-medium tracking-[0.3em] uppercase text-primary mb-3">Reach Out</p>
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-          Get in <span className="text-gradient-olive italic">Touch</span>
+        <p className="font-body text-[11px] font-medium tracking-[0.35em] uppercase text-primary/70 mb-4">
+          Reach Out
+        </p>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
+          Get in <span className="italic text-gradient-olive">Touch</span>
         </h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-4xl mx-auto">
         {contacts.map((c, i) => (
           <motion.a
             key={c.label}
             href={c.href}
             target={c.external ? "_blank" : undefined}
             rel={c.external ? "noopener noreferrer" : undefined}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            whileHover={{ y: -6, transition: { duration: 0.25 } }}
-            className="flex flex-col items-center gap-3 bg-card rounded-3xl p-7 hover:shadow-xl transition-all duration-300 group"
+            transition={{ duration: 0.5, delay: i * 0.08, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="flex flex-col items-center gap-4 bg-card/60 rounded-2xl p-8 
+                       hover:bg-card hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1
+                       transition-all duration-500 group"
           >
-            <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center group-hover:bg-gradient-olive group-hover:text-primary-foreground transition-colors duration-300">
-              <c.icon size={22} strokeWidth={1.5} />
+            <div className="w-11 h-11 rounded-xl bg-primary/8 text-primary flex items-center justify-center 
+                            group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+              <c.icon size={20} strokeWidth={1.5} />
             </div>
-            <p className="font-display text-sm text-foreground">{c.label}</p>
-            <p className="font-body text-xs text-muted-foreground text-center">{c.value}</p>
+            <div className="text-center">
+              <p className="font-display text-sm text-foreground mb-1">{c.label}</p>
+              <p className="font-body text-xs text-muted-foreground">{c.value}</p>
+            </div>
           </motion.a>
         ))}
       </div>

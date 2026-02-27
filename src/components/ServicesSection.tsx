@@ -40,37 +40,41 @@ const services = [
 ];
 
 const ServicesSection = () => (
-  <section id="services" className="section-padding bg-card">
+  <section id="services" className="section-padding bg-card/50">
     <div className="container-narrow">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-14"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-20"
       >
-        <p className="font-body text-xs font-medium tracking-[0.3em] uppercase text-primary mb-3">What We Offer</p>
-        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
-          Our <span className="text-gradient-olive italic">Services</span>
+        <p className="font-body text-[11px] font-medium tracking-[0.35em] uppercase text-primary/70 mb-4">
+          What We Offer
+        </p>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-foreground">
+          Our <span className="italic text-gradient-olive">Services</span>
         </h2>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {services.map((s, i) => (
           <motion.div
             key={s.title}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: i * 0.07 }}
-            whileHover={{ y: -4, transition: { duration: 0.25 } }}
-            className="bg-background rounded-3xl p-7 hover:shadow-xl transition-all duration-300 group cursor-default"
+            transition={{ duration: 0.5, delay: i * 0.06, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="group bg-background rounded-2xl p-8 
+                       hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1
+                       transition-all duration-500 cursor-default"
           >
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-5 group-hover:bg-gradient-olive group-hover:text-primary-foreground transition-colors duration-300">
-              <s.icon size={22} strokeWidth={1.5} />
+            <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-primary/8 text-primary mb-6 
+                            group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-500">
+              <s.icon size={20} strokeWidth={1.5} />
             </div>
             <h3 className="font-display text-lg text-foreground mb-2">{s.title}</h3>
-            <p className="font-body text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+            <p className="font-body text-[13px] text-muted-foreground leading-relaxed font-light">{s.desc}</p>
           </motion.div>
         ))}
       </div>
