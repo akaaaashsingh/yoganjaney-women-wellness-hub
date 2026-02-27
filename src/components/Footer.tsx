@@ -4,8 +4,16 @@ import logo from "@/assets/logo.png";
 const Footer = () => (
   <footer className="bg-earth py-16 px-6 md:px-8 border-t border-white/5 relative z-[60]">
     <div className="container-narrow flex flex-col md:flex-row items-center justify-between gap-10">
-      <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <img src={logo} alt="Yoganjaney" className="h-10 w-auto brightness-[20]" loading="lazy" />
+      <Link
+        to="/"
+        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+      >
+        <img
+          src={logo}
+          alt="Yoganjaney logo"
+          className="h-10 md:h-12 w-auto"
+          loading="eager"
+        />
       </Link>
       <p className="font-body text-[11px] text-white/30 text-center tracking-[0.2em] uppercase">
         © {new Date().getFullYear()} Yoganjaney. All rights reserved.
