@@ -1,25 +1,30 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Specialisations", href: "#specialisations" },
-  { label: "Services", href: "#services" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Specialisations", href: "/#specialisations" },
+  { label: "Services", href: "/#services" },
+  { label: "Contact", href: "/#contact" },
+  { label: "Courses", href: "/courses" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const isHome = location.pathname === "/";
 
   return (
     <nav
@@ -30,20 +35,37 @@ const Navbar = () => {
       }`}
     >
       <div className="container-narrow flex items-center justify-between px-6 md:px-8">
-        <a href="#home" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-          <img src={logo} alt="Yoganjaney logo" className="h-10 md:h-12 w-auto" loading="eager" />
-        </a>
+        <Link
+          to="/"
+          className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+        >
+          <img
+            src={logo}
+            alt="Yoganjaney logo"
+            className="h-10 md:h-12 w-auto"
+            loading="eager"
+          />
+        </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8 lg:gap-12">
           {navLinks.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="font-body text-[13px] font-medium tracking-wider text-foreground/70 hover:text-primary transition-all duration-300"
-              >
-                {l.label.toUpperCase()}
-              </a>
+              {l.href.startsWith("/#") && isHome ? (
+                <a
+                  href={l.href.replace("/", "")}
+                  className="font-body text-[13px] font-medium tracking-wider text-foreground/70 hover:text-primary transition-all duration-300"
+                >
+                  {l.label.toUpperCase()}
+                </a>
+              ) : (
+                <Link
+                  to={l.href}
+                  className="font-body text-[13px] font-medium tracking-wider text-foreground/70 hover:text-primary transition-all duration-300"
+                >
+                  {l.label.toUpperCase()}
+                </Link>
+              )}
             </li>
           ))}
           <li>
@@ -86,13 +108,23 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
                 >
-                  <a
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="font-body text-[15px] text-foreground/70 hover:text-foreground transition-colors"
-                  >
-                    {l.label}
-                  </a>
+                  {l.href.startsWith("/#") && isHome ? (
+                    <a
+                      href={l.href.replace("/", "")}
+                      onClick={() => setOpen(false)}
+                      className="font-body text-[15px] text-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={l.href}
+                      onClick={() => setOpen(false)}
+                      className="font-body text-[15px] text-foreground/70 hover:text-foreground transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  )}
                 </motion.li>
               ))}
               <motion.li
