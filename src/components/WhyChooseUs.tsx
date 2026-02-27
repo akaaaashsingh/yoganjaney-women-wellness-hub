@@ -24,16 +24,6 @@ const reasons = [
   },
 ];
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-
 const WhyChooseUs = () => (
   <section className="section-padding bg-card">
     <div className="container-narrow">
@@ -44,33 +34,31 @@ const WhyChooseUs = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-14"
       >
-        <p className="font-body text-sm tracking-[0.2em] uppercase text-gold mb-2">Why Yoganjaney</p>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-          Why Choose <span className="text-gradient-gold">Us</span>
+        <p className="font-body text-xs font-medium tracking-[0.3em] uppercase text-primary mb-3">Why Yoganjaney</p>
+        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+          Why Choose <span className="text-gradient-olive italic">Us</span>
         </h2>
       </motion.div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8"
-      >
-        {reasons.map((r) => (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {reasons.map((r, i) => (
           <motion.div
             key={r.title}
-            variants={item}
-            className="bg-background rounded-2xl p-8 text-center shadow-sm hover:shadow-md transition-shadow"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            className="bg-background rounded-3xl p-8 text-center shadow-sm hover:shadow-xl transition-shadow duration-300 cursor-default"
           >
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gold/10 text-gold mb-5">
-              <r.icon size={28} />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-primary/10 text-primary mb-5">
+              <r.icon size={26} strokeWidth={1.5} />
             </div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-2">{r.title}</h3>
+            <h3 className="font-display text-lg text-foreground mb-2">{r.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">{r.desc}</p>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   </section>
 );

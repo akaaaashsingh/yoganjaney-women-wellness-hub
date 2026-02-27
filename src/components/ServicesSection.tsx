@@ -39,16 +39,6 @@ const services = [
   },
 ];
 
-const container = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 25 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
 const ServicesSection = () => (
   <section id="services" className="section-padding bg-card">
     <div className="container-narrow">
@@ -59,33 +49,31 @@ const ServicesSection = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-14"
       >
-        <p className="font-body text-sm tracking-[0.2em] uppercase text-gold mb-2">What We Offer</p>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-          Our <span className="text-gradient-gold">Services</span>
+        <p className="font-body text-xs font-medium tracking-[0.3em] uppercase text-primary mb-3">What We Offer</p>
+        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+          Our <span className="text-gradient-olive italic">Services</span>
         </h2>
       </motion.div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-40px" }}
-        className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-      >
-        {services.map((s) => (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {services.map((s, i) => (
           <motion.div
             key={s.title}
-            variants={item}
-            className="bg-background rounded-2xl p-7 hover:shadow-lg transition-shadow group"
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.5, delay: i * 0.07 }}
+            whileHover={{ y: -4, transition: { duration: 0.25 } }}
+            className="bg-background rounded-3xl p-7 hover:shadow-xl transition-all duration-300 group cursor-default"
           >
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold/10 text-gold mb-4 group-hover:bg-gradient-gold group-hover:text-primary-foreground transition-colors">
-              <s.icon size={24} />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 text-primary mb-5 group-hover:bg-gradient-olive group-hover:text-primary-foreground transition-colors duration-300">
+              <s.icon size={22} strokeWidth={1.5} />
             </div>
-            <h3 className="font-display text-lg font-semibold text-foreground mb-2">{s.title}</h3>
+            <h3 className="font-display text-lg text-foreground mb-2">{s.title}</h3>
             <p className="font-body text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </div>
   </section>
 );
