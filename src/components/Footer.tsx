@@ -1,20 +1,20 @@
 import logo from "@/assets/logo.png";
 
 const Footer = () => (
-  <footer className="bg-foreground py-12 px-6 md:px-8">
-    <div className="container-narrow flex flex-col md:flex-row items-center justify-between gap-6">
-      <a href="#home" className="flex items-center gap-2">
-        <img src={logo} alt="Yoganjaney" className="h-10 w-auto brightness-[10]" loading="lazy" />
+  <footer className="bg-earth py-16 px-6 md:px-8 border-t border-white/5 relative z-[60]">
+    <div className="container-narrow flex flex-col md:flex-row items-center justify-between gap-10">
+      <a href="#home" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <img src={logo} alt="Yoganjaney" className="h-10 w-auto brightness-[20]" loading="lazy" />
       </a>
-      <p className="font-body text-xs text-background/30 text-center tracking-wide">
+      <p className="font-body text-[11px] text-white/30 text-center tracking-[0.2em] uppercase">
         © {new Date().getFullYear()} Yoganjaney. All rights reserved.
       </p>
-      <div className="flex gap-6">
+      <div className="flex gap-10">
         <a
           href="https://instagram.com/yoganjaney_official"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-body text-xs text-background/30 hover:text-background/70 transition-colors duration-300 tracking-wide"
+          className="font-body text-[11px] font-medium text-white/40 hover:text-white transition-all duration-500 tracking-[0.2em] uppercase"
         >
           Instagram
         </a>
@@ -22,7 +22,7 @@ const Footer = () => (
           href="https://wa.me/919893233681?text=Hi"
           target="_blank"
           rel="noopener noreferrer"
-          className="font-body text-xs text-background/30 hover:text-background/70 transition-colors duration-300 tracking-wide"
+          className="font-body text-[11px] font-medium text-white/40 hover:text-white transition-all duration-500 tracking-[0.2em] uppercase"
         >
           WhatsApp
         </a>

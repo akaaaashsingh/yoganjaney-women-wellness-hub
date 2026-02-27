@@ -23,26 +23,26 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-[0_1px_0_0_hsl(var(--border))]"
-          : "bg-transparent"
+          ? "bg-white/70 backdrop-blur-2xl shadow-sm border-b border-white/20 py-2"
+          : "bg-transparent py-4"
       }`}
     >
-      <div className="container-narrow flex items-center justify-between h-16 md:h-20 px-6 md:px-8">
-        <a href="#home" className="flex items-center gap-2">
-          <img src={logo} alt="Yoganjaney logo" className="h-11 md:h-13 w-auto" loading="eager" />
+      <div className="container-narrow flex items-center justify-between px-6 md:px-8">
+        <a href="#home" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <img src={logo} alt="Yoganjaney logo" className="h-10 md:h-12 w-auto" loading="eager" />
         </a>
 
         {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-10">
+        <ul className="hidden md:flex items-center gap-8 lg:gap-12">
           {navLinks.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="font-body text-[13px] tracking-wide text-foreground/60 hover:text-foreground transition-colors duration-300"
+                className="font-body text-[13px] font-medium tracking-wider text-foreground/70 hover:text-primary transition-all duration-300"
               >
-                {l.label}
+                {l.label.toUpperCase()}
               </a>
             </li>
           ))}
@@ -51,9 +51,9 @@ const Navbar = () => {
               href="https://wa.me/919893233681?text=Hi"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary !px-5 !py-2"
+              className="btn-primary !px-6 !py-2.5 !text-[12px] uppercase tracking-widest shadow-none hover:shadow-lg hover:shadow-primary/20"
             >
-              Book a Session
+              Book Now
             </a>
           </li>
         </ul>

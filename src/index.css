@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,45 +6,46 @@
 
 @layer base {
   :root {
-    --background: 40 20% 97%;
-    --foreground: 30 10% 10%;
+    --background: 270 30% 99%;
+    --foreground: 270 30% 15%;
 
-    --card: 40 15% 94%;
-    --card-foreground: 30 10% 10%;
+    --card: 270 30% 98%;
+    --card-foreground: 270 30% 15%;
 
-    --popover: 40 20% 97%;
-    --popover-foreground: 30 10% 10%;
+    --popover: 270 30% 99%;
+    --popover-foreground: 270 30% 15%;
 
-    --primary: 158 25% 28%;
-    --primary-foreground: 40 20% 97%;
+    --primary: 270 40% 55%;
+    --primary-foreground: 270 20% 99%;
 
-    --secondary: 35 15% 90%;
-    --secondary-foreground: 30 10% 15%;
+    --secondary: 270 40% 94%;
+    --secondary-foreground: 270 40% 30%;
 
-    --muted: 35 10% 92%;
-    --muted-foreground: 30 8% 46%;
+    --muted: 270 30% 95%;
+    --muted-foreground: 270 15% 45%;
 
-    --accent: 158 20% 38%;
-    --accent-foreground: 40 20% 97%;
+    --accent: 340 40% 65%;
+    --accent-foreground: 340 20% 99%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 35 12% 88%;
-    --input: 35 12% 88%;
-    --ring: 158 25% 28%;
+    --border: 270 30% 92%;
+    --input: 270 30% 92%;
+    --ring: 270 40% 55%;
 
-    --radius: 1rem;
+    --radius: 1.5rem;
 
-    --olive: 158 25% 28%;
-    --olive-light: 158 15% 90%;
-    --terracotta: 18 55% 52%;
-    --sand: 35 25% 87%;
-    --cream: 40 20% 97%;
-    --earth: 30 10% 10%;
+    --lilac: 270 40% 92%;
+    --lilac-dark: 270 30% 45%;
+    --pale-pink: 340 60% 96%;
+    --rose: 340 40% 65%;
+    --lavender: 255 40% 94%;
+    --cream: 30 30% 98%;
+    --earth: 270 30% 15%;
 
-    --font-display: 'Instrument Serif', serif;
-    --font-body: 'Inter', sans-serif;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -73,55 +74,58 @@
 }
 
 @layer utilities {
-  .text-gradient-olive {
+  .text-gradient-lilac {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(158 25% 28%), hsl(158 20% 38%));
+    background-image: linear-gradient(135deg, hsl(270 40% 55%), hsl(340 40% 65%));
   }
 
-  .text-gradient-terra {
+  .text-gradient-rose {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(18 55% 52%), hsl(20 50% 42%));
+    background-image: linear-gradient(135deg, hsl(340 40% 65%), hsl(340 40% 50%));
   }
 
-  .bg-gradient-warm {
-    background: linear-gradient(135deg, hsl(40 20% 97%), hsl(35 15% 90%));
+  .bg-gradient-pastel {
+    background: linear-gradient(135deg, hsl(270 40% 98%), hsl(340 60% 98%));
   }
 
-  .bg-gradient-olive {
-    background: linear-gradient(135deg, hsl(158 25% 28%), hsl(158 20% 38%));
+  .bg-gradient-lilac {
+    background: linear-gradient(135deg, hsl(270 40% 55%), hsl(270 30% 45%));
   }
 
-  .bg-gradient-hero {
-    background: linear-gradient(180deg, hsl(40 20% 97%) 0%, hsl(40 15% 94%) 100%);
+  .bg-gradient-glass {
+    @apply bg-white/40 backdrop-blur-xl border border-white/40;
   }
 
   .section-padding {
-    @apply px-6 py-20 md:px-8 md:py-32 lg:px-16;
+    @apply px-6 py-10 md:px-12 md:py-24 lg:px-24;
   }
 
   .container-narrow {
-    @apply mx-auto max-w-6xl;
+    @apply mx-auto max-w-5xl;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center bg-gradient-olive text-primary-foreground 
-           px-7 py-3.5 rounded-full font-body text-sm font-medium tracking-wide 
-           hover:shadow-xl hover:shadow-primary/15 transition-all duration-500 
-           hover:scale-[1.03] active:scale-[0.98];
+    @apply inline-flex items-center justify-center bg-primary text-primary-foreground 
+           px-8 py-4 rounded-full font-body text-sm font-semibold tracking-wide 
+           shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 
+           transition-all duration-500 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center border border-foreground/15 text-foreground 
-           px-7 py-3.5 rounded-full font-body text-sm font-medium tracking-wide 
-           hover:border-foreground/30 hover:bg-foreground/5 transition-all duration-500 
-           hover:scale-[1.03] active:scale-[0.98];
+    @apply inline-flex items-center justify-center border border-primary/20 bg-white/50 text-primary
+           px-8 py-4 rounded-full font-body text-sm font-semibold tracking-wide 
+           backdrop-blur-sm hover:bg-white/80 transition-all duration-500 
+           hover:scale-[1.02] active:scale-[0.98];
   }
 }
 
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: hsl(158 25% 28% / 0.15);
+  background: hsl(270 40% 55% / 0.15);
+  color: hsl(270 40% 45%);
 }

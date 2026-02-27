@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Instrument Serif", "serif"],
-        body: ["Inter", "sans-serif"],
+        display: ["Cormorant Garamond", "serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,10 +51,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        olive: "hsl(var(--olive))",
-        "olive-light": "hsl(var(--olive-light))",
-        terracotta: "hsl(var(--terracotta))",
-        sand: "hsl(var(--sand))",
+        lilac: "hsl(var(--lilac))",
+        "lilac-dark": "hsl(var(--lilac-dark))",
+        "pale-pink": "hsl(var(--pale-pink))",
+        rose: "hsl(var(--rose))",
+        lavender: "hsl(var(--lavender))",
         cream: "hsl(var(--cream))",
         earth: "hsl(var(--earth))",
         sidebar: {
