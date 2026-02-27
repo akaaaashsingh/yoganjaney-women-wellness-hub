@@ -27,13 +27,13 @@ const Specialisations = () => (
         transition={{ duration: 0.6 }}
         className="text-center mb-14"
       >
-        <p className="font-body text-sm tracking-[0.2em] uppercase text-gold mb-2">Expertise</p>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-          Our <span className="text-gradient-gold">Specialisations</span>
+        <p className="font-body text-xs font-medium tracking-[0.3em] uppercase text-primary mb-3">Expertise</p>
+        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl text-foreground">
+          Our <span className="text-gradient-olive italic">Specialisations</span>
         </h2>
       </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-10">
+      <div className="grid md:grid-cols-2 gap-8">
         {specs.map((s, i) => (
           <motion.div
             key={s.title}
@@ -41,17 +41,18 @@ const Specialisations = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.6, delay: i * 0.15 }}
-            className="group relative rounded-2xl overflow-hidden shadow-lg"
+            whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
+            className="group relative rounded-3xl overflow-hidden shadow-lg cursor-default"
           >
             <img
               src={s.img}
               alt={s.alt}
-              className="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-80 object-cover group-hover:scale-110 transition-transform duration-700"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/90 via-warm-brown/40 to-transparent" />
-            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-              <h3 className="font-display text-2xl font-bold text-cream mb-2">{s.title}</h3>
+            <div className="absolute inset-0 bg-gradient-to-t from-earth/90 via-earth/40 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-8">
+              <h3 className="font-display text-2xl text-cream mb-2">{s.title}</h3>
               <p className="font-body text-sm text-cream/80 leading-relaxed">{s.desc}</p>
             </div>
           </motion.div>
