@@ -1,7 +1,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import pregnancyImg from "@/assets/pregnancy-yoga.png";
-import meditationImg from "@/assets/meditation.png";
+import { useRef, useState } from "react";
+import pregnancyImg from "@/assets/pregnancy-yoga-1.png";
+import pregnancyImg2 from "@/assets/pregnancy-yoga-2.png";
+import pregnancyImg3 from "@/assets/pregnancy-yoga-3.png";
+import femaleHealthImg from "@/assets/female-health-1.png";
+import femaleHealthImg2 from "@/assets/female-health-2.png";
+import femaleHealthImg3 from "@/assets/female-health-3.png";
 
 const specs = [
   {
@@ -16,7 +20,7 @@ const specs = [
       "Managing Gestational Complications: Linked to lower risk of hypertension and gestational diabetes.",
       "Postpartum Foundation: Pelvic floor engagement ensures faster recovery after delivery.",
     ],
-    img: pregnancyImg,
+    img: [pregnancyImg2, pregnancyImg, pregnancyImg3],
     alt: "Pregnancy yoga session",
   },
   {
@@ -28,13 +32,14 @@ const specs = [
       "• Bone Density & Longevity: Weight-bearing yoga poses help maintain bone mineral density, a critical factor for women as they age to prevent Osteoporosis.",
       "• Emotional Fortitude: Beyond physical strength, yoga fosters 'Mind-Body Mapping', helping women navigate life's pressures with a calm and centered nervous system.",
     ],
-    img: meditationImg,
+    img: [femaleHealthImg, femaleHealthImg2, femaleHealthImg3],
     alt: "Women's health yoga session",
   },
 ];
 
 const SpecCard = ({ s, i }: { s: (typeof specs)[0]; i: number }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const [activeImg, setActiveImg] = useState<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -57,15 +62,36 @@ const SpecCard = ({ s, i }: { s: (typeof specs)[0]; i: number }) => {
       className="grid md:grid-cols-2 gap-10 items-center rounded-[2rem] overflow-hidden"
     >
       {/* Image */}
-      <div className="relative overflow-hidden rounded-[2rem] min-h-[320px] md:min-h-[420px]">
-        <motion.img
-          src={s.img}
-          alt={s.alt}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ scale: imgScale }}
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+      <div className="relative min-h-[420px] md:min-h-[520px]">
+        {s.img.map((imgSrc, imgIndex) => {
+          const positions = [
+            "left-0 top-0 w-[72%] h-[60%]", // 1st image (base)
+            "right-[6%] top-[42%] w-[56%] h-[56%]", // 2nd image stacked on first
+            "left-[1%] top-[68%] w-[60%] h-[42%]", // 3rd image stacked on second
+          ];
+
+          const defaultZIndex = [10, 30, 20];
+          const zIndex =
+            activeImg === imgIndex ? 50 : defaultZIndex[imgIndex] || 10;
+
+          return (
+            <motion.img
+              key={imgIndex}
+              src={imgSrc}
+              alt={s.alt}
+              className={`absolute object-cover rounded-[1.5rem] shadow-lg cursor-pointer transition-all duration-300 ${
+                positions[imgIndex] || positions[0]
+              }`}
+              style={{
+                scale: imgScale,
+                zIndex,
+              }}
+              loading="lazy"
+              onMouseEnter={() => setActiveImg(imgIndex)}
+              onMouseLeave={() => setActiveImg(null)}
+            />
+          );
+        })}
       </div>
 
       {/* Content */}
@@ -76,7 +102,6 @@ const SpecCard = ({ s, i }: { s: (typeof specs)[0]; i: number }) => {
 
         <div className="font-body text-[15px] text-foreground/80 leading-relaxed font-light space-y-4">
           {s.desc.map((line, index) => {
-            // If line contains colon, treat text before colon as heading
             if (line.includes(":")) {
               const [heading, ...rest] = line.split(":");
               return (

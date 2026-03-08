@@ -27,8 +27,8 @@ const HeroSection = () => {
           loading="eager"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/20" />
       </motion.div>
 
       <motion.div
