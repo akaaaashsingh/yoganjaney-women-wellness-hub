@@ -510,7 +510,7 @@ Please let me know the next steps. Thank you.
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 24, scale: 0.98 }}
               transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-              className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-white/50 bg-white/85 p-6 md:p-10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+              className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-white/50 bg-white/85 p-5 md:p-10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] backdrop-blur-xl max-h-[85vh] overflow-y-auto md:max-h-none"
               role="dialog"
               aria-modal="true"
               aria-labelledby="register-modal-title"
