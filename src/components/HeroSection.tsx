@@ -8,6 +8,7 @@ const HeroSection = () => {
     target: ref,
     offset: ["start start", "end start"],
   });
+
   const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
@@ -23,24 +24,24 @@ const HeroSection = () => {
         <img
           src={heroImg}
           alt=""
-          className="w-full h-[120%] object-cover"
+          className="w-full h-[120%] object-cover object-[68%_center] md:h-[120%] md:object-center"
           loading="eager"
           aria-hidden="true"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-background/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-background/25 md:from-background/90 md:via-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/82 to-background/28 md:from-background/80 md:to-background/20" />
       </motion.div>
 
       <motion.div
         style={{ y: textY, opacity }}
-        className="container-narrow relative z-10 px-6 md:px-8 pt-28 pb-16"
+        className="container-narrow relative z-10 px-5 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-28 pb-14 sm:pb-16"
       >
-        <div className="max-w-xl">
+        <div className="max-w-full md:max-w-xl">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="font-header text-[11px] font-medium tracking-[0.35em] uppercase text-primary mb-6"
+            className="font-header text-[10px] sm:text-[11px] md:text-[11px] font-medium tracking-[0.28em] sm:tracking-[0.32em] md:tracking-[0.35em] uppercase text-primary mb-6 sm:mb-5 md:mb-6"
           >
             Women's Wellness Yoga · Raipur
           </motion.p>
@@ -49,7 +50,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-[clamp(3.5rem,8vw,2.5rem)] leading-[0.95] text-foreground mb-10 font-medium"
+            className="font-display text-[clamp(2.9rem,9vw,4.4rem)] md:text-[clamp(3.5rem,8vw,2.5rem)] leading-[0.98] sm:leading-[0.96] md:leading-[0.95] text-foreground mb-6 sm:mb-8 md:mb-10 font-medium"
           >
             A journey of health strength and balance
           </motion.h1>
@@ -58,7 +59,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-body text-[18px] md:text-xl text-muted-foreground max-w-lg mb-14 leading-[1.7] tracking-tight"
+            className="font-body text-[15px] sm:text-[16px] md:text-xl text-muted-foreground max-w-full md:max-w-lg mb-8 sm:mb-10 md:mb-14 leading-[1.75] md:leading-[1.7] tracking-tight"
           >
             Yoga is an ancient science that serves as the ultimate tool for
             maintaining balance in today's fast-paced life. Yoga is not just
@@ -75,13 +76,13 @@ const HeroSection = () => {
               delay: 0.85,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
-            className="flex flex-wrap items-center gap-6"
+            className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-4 sm:gap-5 md:gap-6"
           >
             <a
               href="https://wa.me/919893233681?text=Hi"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="btn-primary w-full sm:w-auto justify-center"
             >
               Start Your Journey
             </a>
@@ -103,7 +104,7 @@ const HeroSection = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:block"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
