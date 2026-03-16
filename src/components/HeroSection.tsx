@@ -20,7 +20,10 @@ const HeroSection = () => {
       className="relative min-h-[100svh] flex items-center overflow-hidden sticky top-0 z-0"
     >
       {/* Parallax background */}
-      <motion.div className="absolute inset-0" style={{ y: imgY }}>
+      <motion.div
+        className="absolute -top-48 left-0 right-0 bottom-0 md:top-0"
+        style={{ y: imgY }}
+      >
         <img
           src={heroImg}
           alt=""
