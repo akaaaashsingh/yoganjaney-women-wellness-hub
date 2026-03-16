@@ -27,7 +27,7 @@ const HeroSection = () => {
         <img
           src={heroImg}
           alt=""
-          className="w-full h-[120%] object-cover object-[68%_center] md:h-[120%] md:object-center"
+          className="w-full h-[120%] object-cover object-[40%_center] md:h-[120%] md:object-center"
           loading="eager"
           aria-hidden="true"
         />
