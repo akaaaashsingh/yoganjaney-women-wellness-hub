@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState, type FormEvent, type ChangeEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Star, ArrowRight, Clock, Calendar, Users, MapPin } from "lucide-react";
+import { Star, ArrowRight, Clock, Calendar, MapPin, X } from "lucide-react";
+
+const WHATSAPP_NUMBER = "919893233681";
 
 const courses = [
   {
@@ -155,8 +157,82 @@ const courses = [
   },
 ];
 
+type Course = (typeof courses)[0];
+
+type RegistrationFormState = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  isWhatsappNumber: boolean;
+  email: string;
+};
+
+const initialFormState: RegistrationFormState = {
+  firstName: "",
+  lastName: "",
+  phoneNumber: "",
+  isWhatsappNumber: true,
+  email: "",
+};
+
+const inputClassName =
+  "w-full rounded-[1.5rem] border border-white/60 bg-white/70 px-5 py-4 font-body text-sm text-foreground outline-none transition-all duration-300 placeholder:text-muted-foreground/60 focus:border-primary/40 focus:bg-white focus:ring-2 focus:ring-primary/10";
+
 const Courses = () => {
   const [activeTab, setActiveTab] = useState<"online" | "offline">("online");
+  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+  const [formData, setFormData] =
+    useState<RegistrationFormState>(initialFormState);
+
+  const openRegisterModal = (course: Course) => {
+    setSelectedCourse(course);
+    setFormData(initialFormState);
+  };
+
+  const closeRegisterModal = () => {
+    setSelectedCourse(null);
+    setFormData(initialFormState);
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleRegisterSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!selectedCourse) return;
+
+    const trimmedEmail = formData.email.trim();
+
+    const message = `
+Hi, my name is ${formData.firstName.trim()} ${formData.lastName.trim()}.
+
+I would like to register for the *${selectedCourse.title}* course.
+
+Phone number: ${formData.phoneNumber.trim()}
+${
+  formData.isWhatsappNumber
+    ? `WhatsApp number: ${formData.phoneNumber.trim()}`
+    : ""
+}
+${trimmedEmail ? `Email: ${trimmedEmail}` : ""}
+
+Please let me know the next steps. Thank you.
+`.trim();
+
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      message
+    )}`;
+
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    closeRegisterModal();
+  };
 
   return (
     <div className="bg-background min-h-screen">
@@ -262,17 +338,11 @@ const Courses = () => {
                       </div>
 
                       <div className="flex flex-col md:flex-row items-center justify-between border-t border-white/40 pt-10 gap-8">
-                        {/* <div className="flex flex-wrap gap-8 text-muted-foreground font-body text-[13px] font-medium tracking-wide">
-                          <span className="flex items-center gap-2">
-                            <Calendar size={16} strokeWidth={1.5} className="text-primary/40" />
-                            {course.duration}
-                          </span>
-                          <span className="flex items-center gap-2">
-                            <Users size={16} strokeWidth={1.5} className="text-primary/40" />
-                            {course.students}
-                          </span>
-                        </div> */}
-                        <button className="group flex items-center gap-3 font-body text-sm font-bold text-primary tracking-widest uppercase hover:opacity-70 transition-all duration-300">
+                        <button
+                          type="button"
+                          onClick={() => openRegisterModal(course)}
+                          className="group flex items-center gap-3 font-body text-sm font-bold text-primary tracking-widest uppercase hover:opacity-70 transition-all duration-300"
+                        >
                           Register Now
                           <ArrowRight
                             size={18}
@@ -419,6 +489,176 @@ const Courses = () => {
       </main>
 
       <Footer />
+
+      <AnimatePresence>
+        {selectedCourse && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              type="button"
+              aria-label="Close registration modal"
+              onClick={closeRegisterModal}
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 24, scale: 0.98 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 w-full max-w-2xl rounded-[2rem] border border-white/50 bg-white/85 p-6 md:p-10 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="register-modal-title"
+            >
+              <div className="mb-8 flex items-start justify-between gap-6">
+                <div>
+                  <p className="mb-3 font-body text-[11px] font-semibold uppercase tracking-[0.35em] text-primary/60">
+                    Course Registration
+                  </p>
+                  <h3
+                    id="register-modal-title"
+                    className="font-display text-3xl md:text-4xl text-foreground"
+                  >
+                    Register for{" "}
+                    <span className="italic text-gradient-lilac">
+                      {selectedCourse.title}
+                    </span>
+                  </h3>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={closeRegisterModal}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-white/70 text-foreground/70 transition-all duration-300 hover:bg-white hover:text-foreground"
+                  aria-label="Close"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <form onSubmit={handleRegisterSubmit} className="space-y-6">
+                <div className="grid gap-5 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="firstName"
+                      className="font-body text-sm font-medium text-foreground/80"
+                    >
+                      First Name
+                    </label>
+                    <input
+                      id="firstName"
+                      name="firstName"
+                      type="text"
+                      required
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className={inputClassName}
+                      placeholder="Enter your first name"
+                      autoComplete="given-name"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="lastName"
+                      className="font-body text-sm font-medium text-foreground/80"
+                    >
+                      Last Name
+                    </label>
+                    <input
+                      id="lastName"
+                      name="lastName"
+                      type="text"
+                      required
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className={inputClassName}
+                      placeholder="Enter your last name"
+                      autoComplete="family-name"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label
+                    htmlFor="phoneNumber"
+                    className="font-body text-sm font-medium text-foreground/80"
+                  >
+                    Phone Number
+                  </label>
+                  <input
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    type="tel"
+                    required
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
+                    className={inputClassName}
+                    placeholder="Enter your phone number"
+                    autoComplete="tel"
+                    inputMode="tel"
+                  />
+                </div>
+
+                <label className="flex cursor-pointer items-start gap-3 rounded-[1.5rem] border border-white/60 bg-white/60 px-5 py-4 transition-all duration-300 hover:bg-white/80">
+                  <input
+                    name="isWhatsappNumber"
+                    type="checkbox"
+                    checked={formData.isWhatsappNumber}
+                    onChange={handleInputChange}
+                    className="mt-1 h-4 w-4 rounded border-primary/30 text-primary focus:ring-primary/20"
+                  />
+                  <span className="font-body text-sm text-foreground/80">
+                    This is my WhatsApp number as well
+                  </span>
+                </label>
+
+                <div className="space-y-2">
+                  <label
+                    htmlFor="email"
+                    className="font-body text-sm font-medium text-foreground/80"
+                  >
+                    Email{" "}
+                    <span className="text-muted-foreground">(Optional)</span>
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className={inputClassName}
+                    placeholder="Enter your email address"
+                    autoComplete="email"
+                  />
+                </div>
+
+                <div className="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:items-center sm:justify-end">
+                  <button
+                    type="button"
+                    onClick={closeRegisterModal}
+                    className="rounded-full border border-white/60 bg-white/60 px-6 py-3 font-body text-sm font-semibold text-foreground/70 transition-all duration-300 hover:bg-white hover:text-foreground"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center rounded-full bg-primary px-8 py-3 font-body text-sm font-semibold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:opacity-95"
+                  >
+                    Submit on WhatsApp
+                  </button>
+                </div>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
