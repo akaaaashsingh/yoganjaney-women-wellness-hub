@@ -40,7 +40,7 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="font-body text-[11px] font-medium tracking-[0.35em] uppercase text-primary/80 mb-6"
+            className="font-header text-[11px] font-medium tracking-[0.35em] uppercase text-primary mb-6"
           >
             Women's Wellness Yoga · Raipur
           </motion.p>
@@ -58,7 +58,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-body text-[18px] md:text-xl text-muted-foreground max-w-lg mb-14 leading-[1.7] font-light tracking-tight"
+            className="font-body text-[18px] md:text-xl text-muted-foreground max-w-lg mb-14 leading-[1.7] tracking-tight"
           >
             Yoga is an ancient science that serves as the ultimate tool for
             maintaining balance in today's fast-paced life. Yoga is not just
